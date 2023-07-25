@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Dvt-Weather-App",
+    "name": "Weather-App",
     "slug": "Dvt-Weather-App",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -25,6 +25,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "945a3b8b-6b3e-4af5-8151-c1100514f822"
+      }
     }
   }
 }
