@@ -7,9 +7,7 @@ const SunriseAndSunsetSection = ({ sunriseTime, sunSetTime }) => {
       <Text style={styles.headerText}>Sunrise And Sunset</Text>
       <Image
         style={styles?.image}
-        source={{
-          uri: "https://o.remove.bg/downloads/de8bff89-d22a-4ad5-a9b1-bd27728204bc/sunset-removebg-preview.png",
-        }}
+        source={require('../../assets/sunsetRise.png')}
       />
       <View style={styles.timeContainer}>
         <Text style={styles.time}>{sunriseTime}</Text>
