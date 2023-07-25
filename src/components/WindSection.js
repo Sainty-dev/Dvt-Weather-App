@@ -1,18 +1,18 @@
-import { StyleSheet, Text, View,Image } from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
 import React from "react";
 import ProgressCircle from "react-native-progress-circle";
-const windmillIcon = require('../../assets/windmil.png');
-const WindSection = ({speed,degree}) => {
+const windmillIcon = require("../../assets/windmil.png");
+const WindSection = ({ speed, degree }) => {
   return (
     <View style={styles.container}>
       <View style={{ alignItems: "center" }}>
         <Text style={styles?.progressLabel}>Wind</Text>
-         <Image style={styles?.image} source={windmillIcon}/>
+        <Image style={styles?.image} source={windmillIcon} />
       </View>
       <View style={{ justifyContent: "center" }}>
         <View style={styles.detailsContainer}>
           <Text style={[styles.detailsText, { color: "#cfccc4" }]}>
-           Wind Speed
+            Wind Speed
           </Text>
           <Text style={styles.detailsText}>{speed}&#176;</Text>
         </View>
@@ -55,9 +55,9 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     fontSize: 20,
   },
-  image:{
-    resizeMode:'contain',
-    width:120,
-    height:120
-  }
+  image: {
+    resizeMode: "contain",
+    width: 120,
+    height: 120,
+  },
 });

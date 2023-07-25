@@ -1,9 +1,16 @@
-
-  
-  const HtmlMapRenderComponent = ({ center, coordinates, target, zoom, places, from, to,iconPath }) => {
-    const latLong = `[-25.858460,28.189610]`;
-    const jsonPlaces = JSON.stringify(places);
-    const html = `
+const HtmlMapRenderComponent = ({
+  center,
+  coordinates,
+  target,
+  zoom,
+  places,
+  from,
+  to,
+  iconPath,
+}) => {
+  const latLong = `[-25.858460,28.189610]`;
+  const jsonPlaces = JSON.stringify(places);
+  const html = `
       <!DOCTYPE html>
       <html lang="en">
       <head>
@@ -54,8 +61,8 @@
       </body>
       </html>
     `;
-  
-    return html;
-  };
-  
-  export default HtmlMapRenderComponent;
+
+  return html;
+};
+
+export default HtmlMapRenderComponent;

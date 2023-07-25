@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import ProgressCircle from "react-native-progress-circle";
 
-const ComfortLevelSection = ({humidity,feelsLike,pressure}) => {
+const ComfortLevelSection = ({ humidity, feelsLike, pressure }) => {
   return (
     <View style={styles.container}>
       <View style={{ alignItems: "center" }}>

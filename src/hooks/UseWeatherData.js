@@ -1,13 +1,20 @@
-
-import { useEffect, useState } from 'react';
-import { Alert } from 'react-native';
-import { fetchCurrentWeather, fetchFiveDaysWeatherForecast } from '../Api/Api';
-import { groupWeatherByDay, convertUnixTimestampToTime } from '../utils/DateHelper';
-import { getLocationAsync } from '../utils/LocationHelper';
-import { WEATHER_DATA_KEY,FAVORITE_LOCATIONS_KEY } from '../constants/Constants';
-import { getDataFromCache, saveDataToCache } from '../localStorage/LocalStorageManager';
+import { useEffect, useState } from "react";
+import { Alert } from "react-native";
+import { fetchCurrentWeather, fetchFiveDaysWeatherForecast } from "../Api/Api";
+import {
+  groupWeatherByDay,
+  convertUnixTimestampToTime,
+} from "../utils/DateHelper";
+import { getLocationAsync } from "../utils/LocationHelper";
+import {
+  WEATHER_DATA_KEY,
+  FAVORITE_LOCATIONS_KEY,
+} from "../constants/Constants";
+import {
+  getDataFromCache,
+  saveDataToCache,
+} from "../localStorage/LocalStorageManager";
 import Toast from "react-native-toast-message";
-
 
 const useWeatherData = () => {
   const [weatherData, setWeatherData] = useState({});
@@ -46,13 +53,15 @@ const useWeatherData = () => {
         humidity: currentWeatherData?.main?.humidity,
         pressure: currentWeatherData?.main?.pressure,
         name: currentWeatherData?.name,
-        lat:currentWeatherData?.coord?.lat,
-        long:currentWeatherData?.coord?.lon,
+        lat: currentWeatherData?.coord?.lat,
+        long: currentWeatherData?.coord?.lon,
         weatherDescription: currentWeatherData?.weather[0]?.description,
         weatherType: currentWeatherData?.weather[0]?.main,
         windDegree: currentWeatherData?.wind?.deg,
         windSpeed: currentWeatherData?.wind?.speed,
-        sunriseTime: convertUnixTimestampToTime(currentWeatherData?.sys?.sunrise),
+        sunriseTime: convertUnixTimestampToTime(
+          currentWeatherData?.sys?.sunrise
+        ),
         sunSetTime: convertUnixTimestampToTime(currentWeatherData?.sys?.sunset),
         currentTemperature: currentWeatherData?.main?.temp,
         minimumPossibleTemperature: currentWeatherData?.main?.temp_min,
@@ -64,7 +73,7 @@ const useWeatherData = () => {
 
       await saveDataToCache(WEATHER_DATA_KEY, JSON.stringify(freshWeatherData));
     } catch (error) {
-      Alert.alert('Error getting Weather data:', error.message);
+      Alert.alert("Error getting Weather data:", error.message);
     } finally {
       setIsLoading(false);
     }
@@ -75,12 +84,17 @@ const useWeatherData = () => {
       await saveDataToCache(FAVORITE_LOCATIONS_KEY, JSON.stringify(locations));
     } catch (error) {
       // Handle error
-      console.error('Error saving favorite locations to storage:', error);
+      console.error("Error saving favorite locations to storage:", error);
     }
   };
 
   const addFavoriteLocation = (location) => {
-    if (!favoriteLocations.some((favLocation) => favLocation.lat === location.lat && favLocation.lon === location.lon)) {
+    if (
+      !favoriteLocations.some(
+        (favLocation) =>
+          favLocation.lat === location.lat && favLocation.lon === location.lon
+      )
+    ) {
       const updatedLocations = [...favoriteLocations, location];
       setFavoriteLocations(updatedLocations);
       saveFavoriteLocationsToStorage(updatedLocations);
@@ -88,25 +102,28 @@ const useWeatherData = () => {
         type: "success",
         text1: "Success",
         text2: `${location?.name} is successfully saved!`,
-        position: 'bottom',
+        position: "bottom",
         autoHide: true,
-        visibilityTime: 2500
+        visibilityTime: 2500,
       });
     }
   };
 
   const removeFavoriteLocation = (location) => {
-    const updatedLocations = favoriteLocations.filter((favLocation) => !(favLocation.lat === location.lat && favLocation.lon === location.lon));
+    const updatedLocations = favoriteLocations.filter(
+      (favLocation) =>
+        !(favLocation.lat === location.lat && favLocation.lon === location.lon)
+    );
     setFavoriteLocations(updatedLocations);
     saveFavoriteLocationsToStorage(updatedLocations);
     Toast.show({
-        type: "success",
-        text1: "Success",
-        text2: `${location?.name} is successfully removed!`,
-        position: 'bottom',
-        autoHide: true,
-        visibilityTime: 2500
-      });
+      type: "success",
+      text1: "Success",
+      text2: `${location?.name} is successfully removed!`,
+      position: "bottom",
+      autoHide: true,
+      visibilityTime: 2500,
+    });
   };
   const loadFavoriteLocationsFromStorage = async () => {
     try {
@@ -117,7 +134,7 @@ const useWeatherData = () => {
       }
     } catch (error) {
       // Handle error
-      console.error('Error loading favorite locations from storage:', error);
+      console.error("Error loading favorite locations from storage:", error);
     }
   };
 
@@ -126,7 +143,15 @@ const useWeatherData = () => {
     loadFavoriteLocationsFromStorage();
   }, []);
 
-  return { weatherData, isLoading,favoriteLocations, fetchWeather: getWeatherDataByLocation,loadFavoriteLocationsFromStorage,addFavoriteLocation,removeFavoriteLocation };
+  return {
+    weatherData,
+    isLoading,
+    favoriteLocations,
+    fetchWeather: getWeatherDataByLocation,
+    loadFavoriteLocationsFromStorage,
+    addFavoriteLocation,
+    removeFavoriteLocation,
+  };
 };
 
 export default useWeatherData;

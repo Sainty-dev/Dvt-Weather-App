@@ -26,11 +26,9 @@ const HandleHttpCall = async (endpoint, method = "GET", data = null) => {
 };
 
 export const fetchCurrentWeather = params=>{
-  console.log("::parr>>>",params?.lon)
   return HandleHttpCall(currentWeatherEndPoint(params))
 }
 export const fetchFiveDaysWeatherForecast = params=>{
-  console.log("::parr>>>",params?.lat)
   return HandleHttpCall(fiveDaysForecastEndPoint(params))
 }
 
